@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: schema-0.0.6
+      author: vendor_team
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role_name
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_active
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: datetime
+                  constraints:
+                    nullable: true
