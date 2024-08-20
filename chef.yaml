@@ -128,19 +128,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
   
-  /api/v1/chefs/{chefId}/recipes:
+  /api/v1/recipes:
     get:
       tags:
         - recipes
       summary: Get all recipes by chef ID
       operationId: getRecipesByChefId
       parameters:
-        - name: chefId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
         - name: page
           in: query
           required: false
@@ -180,20 +174,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
   
-  /api/v1/ideas/{ideaId}/chefs/{chefId}/recipes:
+  /api/v1/ideas/{ideaId}/recipes:
     get:
       tags:
         - recipes
-      summary: Get all recipes by chef ID for an idea
-      operationId: getRecipesForAnIdeaByChefId
+      summary: Get all recipes by chef for an idea
+      operationId: getRecipesForAnIdeaByChef
       parameters:
         - name: ideaId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: chefId
           in: path
           required: true
           schema:
@@ -238,11 +226,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
                 
-  /api/v1/ideas/{ideaId}/recipes:              
     post:
       tags:
         - recipes
-      summary: Create a recipe based on a specific idea
+      summary: Create a recipe based on a specific idea by the chef
       operationId: createRecipe
       parameters:
         - name: ideaId
@@ -284,19 +271,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
                 
-  /api/v1/chefs/{chefId}/recipes/{recipeId}:
+  /api/v1/recipes/{recipeId}:
     get:
       tags:
         - recipes
-      summary: Get the recipe details by recipe ID
+      summary: Get the recipe details by recipe ID for the chef
       operationId: getRecipeDetails
       parameters:
-        - name: chefId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
         - name: recipeId
           in: path
           required: true
@@ -335,12 +316,6 @@ paths:
       summary: Update recipe status
       operationId: updateRecipeStatus
       parameters:
-        - name: chefId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
         - name: recipeId
           in: path
           required: true
@@ -426,20 +401,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
                 
-  /api/v1/chefs/{chefId}/orders:
     get:
       tags:
         - orders
-      summary: Retrieve all orders by chef ID
+      summary: Retrieve all orders by chef
       operationId: getOrdersByChefId
       parameters:
-        - name: chefId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-          description: The ID of the chef for whom to retrieve orders.
         - name: page
           in: query
           required: false
@@ -481,19 +448,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           
-  /api/v1/chefs/{chefId}/orders/{orderId}:
+  /api/v1/orders/{orderId}:
     get:
       tags:
         - orders
-      summary: Get order details by order ID
+      summary: Get order details by order ID for the chef
       operationId: getOrderDetailByOrderId
       parameters:
-        - name: chefId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
         - name: orderId
           in: path
           required: true
@@ -537,12 +498,6 @@ paths:
       summary: Update order status by order ID
       operationId: updateOrderStatusByOrderId
       parameters:
-        - name: chefId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
         - name: orderId
           in: path
           required: true
@@ -735,9 +690,6 @@ components:
     RecipeRequest:
       type: object
       properties:
-        chef_id:
-          type: integer
-          format: int32
         title:
           type: string
           maxLength: 20
