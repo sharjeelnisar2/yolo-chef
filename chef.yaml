@@ -72,9 +72,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/IdeaSummary'
+                type: object
+                properties:
+                  ideas:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IdeaSummary'
         '403':
           description: Unauthorized access
           content:
@@ -138,15 +141,32 @@ paths:
           schema:
             type: integer
             format: int32
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1000
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RecipeSummary'
+                type: object
+                properties:
+                  recipes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecipeSummary'
         '403':
           description: Unauthorized access
           content:
@@ -160,7 +180,65 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
   
-  /api/v1/ideas/{ideaId}/recipes:
+  /api/v1/ideas/{ideaId}/chefs/{chefId}/recipes:
+    get:
+      tags:
+        - recipes
+      summary: Get all recipes by chef ID for an idea
+      operationId: getRecipesForAnIdeaByChefId
+      parameters:
+        - name: ideaId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: chefId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recipes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecipeSummary'
+        '403':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                
+  /api/v1/ideas/{ideaId}/recipes:              
     post:
       tags:
         - recipes
@@ -384,9 +462,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/OrderResponse'
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrderResponse'
         '403':
           description: Unauthorized access
           content:
@@ -528,7 +609,7 @@ components:
         created_at:
           type: string
           format: date-time
-    Restrictions:
+    DietryRestrictions:
       type: object
       properties:
         id:
@@ -577,7 +658,7 @@ components:
           type: array
           items:
             type: string
-        restrictions:
+        dietry_restrictions:
           type: array
           items:
             type: string
@@ -602,7 +683,7 @@ components:
           type: array
           items:
             type: string
-        restrictions:
+        dietry_restrictions:
           type: array
           items:
             type: string
