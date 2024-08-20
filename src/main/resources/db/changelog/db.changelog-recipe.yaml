@@ -25,7 +25,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: price
-                  type: varchar(20)
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
@@ -44,7 +44,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: recipe_code
+                  name: code
                   type: varchar(5)
                   constraints:
                     nullable: false
@@ -65,7 +65,7 @@ databaseChangeLog:
                     nullable: false
         - addUniqueConstraint:
             tableName: recipe
-            columnNames: recipe_code
+            columnNames: code
             constraintName: recipe_reference_UNIQUE
         - addForeignKeyConstraint:
             baseTableName: recipe

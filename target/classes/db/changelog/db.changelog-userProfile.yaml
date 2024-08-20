@@ -29,8 +29,13 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: email
+                  type: varchar(11)
+                  constraints:
+                    nullable: false
+              - column:
                   name: contact_no
-                  type: varchar(20)
+                  type: varchar(11)
                   constraints:
                     nullable: false
               - column:

@@ -24,20 +24,20 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: customer_mobile_no
-                  type: int
+                  name: customer_contact_no
+                  type: varchar(11)
                   constraints:
-                    nullable: true
+                    nullable: false
               - column:
                   name: created_at
                   type: datetime
                   constraints:
-                    nullable: true
+                    nullable: false
               - column:
                   name: updated_at
                   type: datetime
                   constraints:
-                    nullable: true
+                    nullable: false
               - column:
                   name: order_status_id
                   type: int

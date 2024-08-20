@@ -25,7 +25,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: description
-                  type: varchar(45)
+                  type: varchar(64)
                   constraints:
                     nullable: false
               - column:

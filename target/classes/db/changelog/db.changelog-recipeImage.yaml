@@ -14,8 +14,18 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: image_url
+                  name: url
                   type: varchar(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: datetime
                   constraints:
                     nullable: false
               - column:
