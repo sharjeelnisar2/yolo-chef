@@ -10,8 +10,11 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class GeminiApiService{
 
-    @Value("AIzaSyBSOrfdfZExRUMIfIB_p1pT8FBJgfwl_NI")
+    @Value("${api.key}")
     private String apiKey;
+
+    @Value("${api.GeminiUrl}")
+    private String geminiUrl;
 
     private final RestTemplate restTemplate;
 
@@ -22,7 +25,7 @@ public class GeminiApiService{
     }
 
     public String generateContent(String requestPayload) {
-        String url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=" + apiKey;
+        String url = geminiUrl + apiKey;
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
