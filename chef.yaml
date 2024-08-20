@@ -926,9 +926,12 @@ components:
     ErrorResponse:
       type: object
       properties:
+        error:
+          type: string
+          description: The error code or type.
         message:
           type: string
-          description: Error message
-      required:
-        - message
-        
+          description: A brief message describing the error.
+        details:
+          type: string
+          description: Additional details about the error.        
