@@ -965,21 +965,14 @@ components:
           type: string
         price:
           type: integer
-        recipe_name:
-          type: string
-        quantity:
-          type: integer
-          format: int32
         created_at:
           type: string
           format: DATETIME
+        status:
+          type: string
     OrderDetailResponse:
       type: object
       properties:
-        customer_name:
-          type: string
-        price:
-          type: integer
         customer_contact_no:
           type: string
         address:
@@ -995,8 +988,6 @@ components:
               type: string
             country:
               type: string
-        status:
-          type: string
         items:
           type: object
           properties:
