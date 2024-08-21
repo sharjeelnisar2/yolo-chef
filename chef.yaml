@@ -384,7 +384,7 @@ paths:
               type: object
               properties:
                 status:
-                  type: integer
+                  type: string
                   description: The new status for the recipe.
               required:
                 - status
@@ -594,7 +594,7 @@ paths:
               type: object
               properties:
                 status:
-                  type: integer
+                  type: string
                   description: The new status for the order.
               required:
                 - status
@@ -667,6 +667,9 @@ components:
     IdeaSummary:
       type: object
       properties:
+        id:
+          type: integer
+          format: int32
         customer_name:
           type: string
         title:
@@ -800,6 +803,9 @@ components:
     RecipeSummary:
       type: object
       properties:
+        id:
+          type: integer
+          format: int32
         title:
           type: string
         description:
