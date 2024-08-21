@@ -49,7 +49,7 @@ paths:
     get:
       tags:
         - ideas
-      summary: Get all ideas
+      summary: Get all ideas with optional filters and sorting
       operationId: getAllIdeas
       parameters:
         - name: page
@@ -66,6 +66,26 @@ paths:
             type: integer
             format: int32
             default: 1000
+        - name: sort_by
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [created_at, title]
+          description: Field by which to sort the results
+        - name: sort_order
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+          description: Sort order (ascending or descending)
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filter ideas by title (partial match)
       responses:
         '200':
           description: OK
@@ -201,6 +221,40 @@ paths:
             type: integer
             format: int32
             default: 1000
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [created_at, price, serving_size]
+          description: Field by which to sort the recipes.
+        - name: sortOrder
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+          description: Order of sorting (ascending or descending).
+        - name: minPrice
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+          description: Minimum price to filter recipes.
+        - name: maxPrice
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+          description: Maximum price to filter recipes.
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Search term to filter recipes by title or description.
       responses:
         '200':
           description: OK
@@ -225,6 +279,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+
                 
     post:
       tags:
@@ -423,6 +478,32 @@ paths:
             format: int32
             default: 100
           description: The number of orders per page for pagination.
+        - name: orderStatus
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filter orders by status (e.g., pending, completed, cancelled).
+        - name: minPrice
+          in: query
+          required: false
+          schema:
+            type: number
+            format: double
+          description: Filter orders with a minimum price.
+        - name: maxPrice
+          in: query
+          required: false
+          schema:
+            type: number
+            format: double
+          description: Filter orders with a maximum price.
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Search orders by customer mobile number or order code.
       responses:
         '200':
           description: A list of orders associated with the specified chef.
@@ -447,6 +528,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+
           
   /api/v1/orders/{orderId}:
     get:
@@ -934,4 +1016,4 @@ components:
           description: A brief message describing the error.
         details:
           type: string
-          description: Additional details about the error.        
+          description: Additional details about the error.
